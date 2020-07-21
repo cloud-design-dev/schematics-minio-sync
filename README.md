@@ -11,10 +11,13 @@ Here are the steps to using this example with Schematics
  - Create a new Worskpace by going to the [Workspace](https://cloud.ibm.com/schematics/workspaces) page and clicking *Create workspace*
  - On the subsequent page give your workspace a name and select the Resource Group where the workspace will be deployed. Then click *Create*. 
  ![Create workspace](images/create-workspace.png)  
- 
+
  - With the workspace created should see the **Import your Terraform template** section. Put in `https://github.com/cloud-design-dev/schematics-minio-sync` under the *GitHub or GitLab repository URL* and make sure to select `terraform_v0.12` for the *Terraform version*.
  - Click Save template information. 
- - On the Workspace overview page you will now fill out the variables (see below for all variables used). Make sure the check the *Sensitive* box next to the following variables `source_account_access_key`, `source_account_secret_key`, `destination_account_access_key`, and `destination_account_secret_key`. 
+ - On the Workspace overview page you will now fill out the variables (see below for all variables used). Make sure the check the *Sensitive* box next to the following variables `source_account_access_key`, `source_account_secret_key`, `destination_account_access_key`, and `destination_account_secret_key`.  
+ - When you've filled out all the variables click Save Changes.  
+ - Run a Schematics Plan.   
+ - Run Schematics Apply.  
 
 ## Variables
 **NOTE:** Schematics sorts the Variables based on the order the API responded so you will have to do some filtering to make it easier to enter in details:
@@ -50,7 +53,3 @@ Filter by key `destination_account_` and fill in the following:
 **destination_account_endpoint** - Cloud Object Storage endpoint on the destination account.  
 **destination_account_access_key** - Cloud Object Storage Access Key on the destination account.  
 **destination_account_secret_key** - Cloud Object Storage Secret Key on the destination account.  
-
- - When you've filled out all the variables click *Save Changes*
- - Run a Schematics Plan
- - Run Schematics Apply
