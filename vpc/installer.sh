@@ -41,7 +41,7 @@ EOL
 cat >/root/copy-buckets.sh <<EOL
 #!/usr/bin/env bash
 
-/usr/local/bin/mc cp source-account/${source_account_bucket} destination-account/${destination_account_bucket} 
+/usr/local/bin/mc cp --recursive source-account/${source_account_bucket}/ destination-account/${destination_account_bucket} 
 EOL
 
 chmod +x /root/copy-buckets.sh
