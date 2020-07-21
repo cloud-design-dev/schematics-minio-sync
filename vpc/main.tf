@@ -45,3 +45,23 @@ resource "ibm_is_security_group_rule" "inbound_from_cse" {
   direction  = "inbound"
   remote     = data.ibm_is_vpc.project_vpc.cse_source_addresses[0].address
 }
+
+resource "ibm_is_security_group_rule" "inbound_ssh" {
+  depends_on = [ibm_is_security_group.minio_sync]
+  group      = ibm_is_security_group.minio_sync.id
+  direction  = "inbound"
+  remote     = "73.232.123.38"
+  tcp {
+    port_min = "22"
+    port_max = "22"
+  }
+}
+
+resource "ibm_is_floating_ip" "floatingip" {
+  name   = "minio-fip"
+  target = ibm_is_instance.minio_instance.primary_network_interface.0.id
+}
+
+output "floatingIP" {
+  value = ibm_is_floating_ip.floatingip.address
+}

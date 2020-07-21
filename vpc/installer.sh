@@ -14,17 +14,44 @@ chmod +x mc
 mv mc /usr/local/bin
 chown minio-user:minio-user /usr/local/bin/mc 
 
-/usr/local/bin/mc config host add destination-account https://s3.${destination_account_endpoint}.cloud-object-storage.appdomain.cloud ${destination_account_access_key} ${destination_account_secret_key}
-/usr/local/bin/mc config host add source-account https://s3.${source_account_endpoint}.cloud-object-storage.appdomain.cloud ${source_account_access_key} ${source_account_secret_key}
+# /usr/local/bin/mc config host add destination-account https://s3.direct.${destination_account_endpoint}.cloud-object-storage.appdomain.cloud ${destination_account_access_key} ${destination_account_secret_key}
+# /usr/local/bin/mc config host add source-account https://s3.direct.${source_account_endpoint}.cloud-object-storage.appdomain.cloud ${source_account_access_key} ${source_account_secret_key}
 
-## Generate new per boot copy job 
-cat >/var/lib/cloud/scripts/per-boot/99-copy-buckets.sh <<EOL
-#!/usr/bin/env bash 
 
+crontime=`date -d '+1 hour' '+%H'`
+
+cat >mc.json <<EOL
+{
+	"version": "9",
+	"hosts": {
+		"destination-account": {
+			"url": "https://s3.direct.${destination_account_endpoint}.cloud-object-storage.appdomain.cloud",
+			"accessKey": "${destination_account_access_key}",
+			"secretKey": "${destination_account_secret_key}",
+			"api": "s3v4",
+			"lookup": "auto"
+		},
+		"source-account": {
+			"url": "https://s3.direct.${source_account_endpoint}.cloud-object-storage.appdomain.cloud",
+			"accessKey": "${source_account_access_key}",
+			"secretKey": "${source_account_secret_key}",
+			"api": "s3v4",
+			"lookup": "auto"
+		}
+	}
+}
+EOL
+
+
+
+cat >/root/copy-buckets.sh <<EOL
+#!/usr/bin/env bash
+dt=`date "+%Y%m%d%H%M"`
+logfile=/tmp/"${dt}-log"
 /usr/local/bin/mc cp source-account/${source_account_bucket} destination-account/${destination_account_bucket} 
 EOL
 
-chmod +x /var/lib/cloud/scripts/per-boot/99-copy-buckets.sh
+chmod +x /root/copy-buckets.sh
 
 
 
