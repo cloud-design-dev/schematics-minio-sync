@@ -21,25 +21,31 @@ Here are the steps to using this example with Schematics
 ![Fill in variables](images/set-variables.png)
 
 ### VPC Resource Variables
-![Filter VPC Resource variables](https://dsc.cloud/quickshare/Shared-Image-2020-07-21-15-03-24.png)
-Filter by key `vpc_` and fill in the following:
+Filter by key `vpc_` and fill in the following: 
+
+![Filter VPC Resource variables](images/filter-vpc.png)
+ 
 **vpc_os_image** - VPC Instance OS Image: Default is currently Ubuntu 18.  
 **vpc_region** - VPC Region where resources will be deployed.  
 **vpc_resource_group** - Resource group where resources will be deployed.  
 **vpc_subnet_id** - VPC Subnet ID where the instance will be deployed.  
 **vpc_ssh_key** - SSH key to add to instance. In case you need to trouble shoot the copy process. 
 
-### Source Account Variables (You are copying **from** this account):
-![Filter Source Account variables](https://dsc.cloud/quickshare/Shared-Image-2020-07-21-15-06-54.png)
-Filter by key `source_account_` and fill in the following:
+### Source Account Variables (You are copying **from** this account):  
+Filter by key `source_account_` and fill in the following:  
+
+![Filter Source Account variables](images/filter-source.png)
+
 **source_account_bucket** - Cloud Object Storage bucket name on the source account.    
 **source_account_endpoint** - Cloud Object Storage endpoint on the source account.   
 **source_account_access_key** - Cloud Object Storage Access Key on the source account.  
 **source_account_secret_key** - Cloud Object Storage Secret Key on the source account.  
 
 ### Destination Account Variables (You are copying **to** this account):
-![Filter Destination Account variables](https://dsc.cloud/quickshare/Shared-Image-2020-07-21-15-08-10.png)
 Filter by key `destination_account_` and fill in the following:
+
+![Filter Destination Account variables](images/filter-destination.png)
+
 **destination_account_bucket** - Cloud Object Storage bucket name on the destination account.   
 **destination_account_endpoint** - Cloud Object Storage endpoint on the destination account.  
 **destination_account_access_key** - Cloud Object Storage Access Key on the destination account.  
