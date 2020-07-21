@@ -4,31 +4,37 @@ variable "vpc_name" {
   type        = string
 }
 
-variable "os_image" {
+variable "vpc_os_image" {
   description = "Default OS image for minio client. Currently tested with Ubuntu 16 and 18."
   type        = string
   default     = "ibm-ubuntu-18-04-1-minimal-amd64-2"
 }
 
-variable "linux_ssh_key" {
+variable "vpc_instance_profile" {
+  description = "Default instance profile size."
+  type        = string
+  default     = "cx2-2x4"
+}
+
+variable "vpc_ssh_key" {
   description = "SSH key to add to instance."
   type        = string
   default     = ""
 }
 
-variable "region" {
+variable "vpc_region" {
   description = "VPC Region where resources will be deployed."
   type        = string
   default     = ""
 }
 
-variable "resource_group" {
+variable "vpc_resource_group" {
   description = "Resource group where resources will be created."
   type        = string
   default     = ""
 }
 
-variable "subnet_id" {
+variable "vpc_subnet_id" {
   description = "Subnet where VPC instance will be deployed."
   type        = string
   default     = ""
@@ -86,8 +92,4 @@ variable "destination_account_secret_key" {
 }
 
 
-variable "default_instance_profile" {
-  description = "Default instance profile size."
-  type        = string
-  default     = "cx2-2x4"
-}
+

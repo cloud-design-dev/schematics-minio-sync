@@ -14,7 +14,11 @@ Here are the steps to using this example with Schematics
  - With the workspace created should see the **Import your Terraform template** section. Put in `https://github.com/cloud-design-dev/schematics-minio-sync/tree/master/vpc` under the *GitHub or GitLab repository URL* and make sure to select `terraform_v0.12` for the *Terraform version*.
 ![Terraform template settings](images/terraform-template.png)
  - Click Save template information. 
- - On the Workspace overview page you will now fill out the variables (see below for all variables used). Make sure the check the *Sensitive* box next to the following variables `source_account_access_key`, `source_account_secret_key`, `destination_account_access_key`, and `destination_account_secret_key`. 
+ - On the Workspace overview page you will now fill out the variables. Schematics sorts the Variables based on the order the API responded so you will have to do some filtering to make it easier to enter in details:
+
+ ![Sort vpc resources]()
+
+
  - When you've filled out all the variables click *Save Changes*
  ![Fill in variables](images/set-variables.png)
  - Run a Schematics Plan

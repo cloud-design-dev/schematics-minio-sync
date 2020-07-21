@@ -1,11 +1,11 @@
 resource "ibm_is_instance" "minio_instance" {
   depends_on = [ibm_is_security_group.minio_sync]
   name       = "minio-sync"
-  image      = data.ibm_is_image.os_image.id
-  profile    = var.default_instance_profile
+  image      = data.ibm_is_image.vpc_os_image.id
+  profile    = var.vpc_instance_profile
 
   primary_network_interface {
-    subnet          = var.subnet_id
+    subnet          = var.vpc_subnet_id
     security_groups = [ibm_is_security_group.minio_sync.id]
   }
 
@@ -14,7 +14,7 @@ resource "ibm_is_instance" "minio_instance" {
 
   vpc  = data.ibm_is_vpc.project_vpc.id
   zone = data.ibm_is_zones.regional_zones.zones[0]
-  keys = [data.ibm_is_ssh_key.linux_key.id]
+  keys = [data.ibm_is_ssh_key.vpc_ssh_key.id]
   user_data = templatefile("${path.module}/installer.sh", {
     source_account_bucket          = var.source_account_bucket,
     source_account_endpoint        = var.source_account_endpoint,
