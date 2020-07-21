@@ -46,6 +46,13 @@ EOL
 
 chmod +x /root/copy-buckets.sh
 
-croncmd="/root/copy-buckets.sh  > /tmp/`date "+%Y%m%d%H%M"`-log 2>&1"
-cronjob="30 `date -d '+1 hour' '+%H'` * * * $croncmd"
-echo "$cronjob" | crontab -
+## Set cron to start depending on when installer script runs
+if [[ "`date "+%M"`" -lt "25" ]]; then 
+    croncmd="/root/copy-buckets.sh  > /tmp/`date "+%Y%m%d%H%M"`-log 2>&1"
+    cronjob="30 `date "+%H"` * * * $croncmd"
+    echo "$cronjob" | crontab -
+else 
+    croncmd="/root/copy-buckets.sh  > /tmp/`date "+%Y%m%d%H%M"`-log 2>&1"
+    cronjob="00 `date -d '+1 hour' '+%H'` * * * $croncmd"
+    echo "$cronjob" | crontab -
+fi
