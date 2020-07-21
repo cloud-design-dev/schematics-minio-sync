@@ -47,7 +47,7 @@ EOL
 cat >/root/copy-buckets.sh <<EOL
 #!/usr/bin/env bash
 dt=`date "+%Y%m%d%H%M"`
-logfile=/tmp/"${dt}-log"
+logfile=/tmp/"`date "+%Y%m%d%H%M"`-log"
 /usr/local/bin/mc cp source-account/${source_account_bucket} destination-account/${destination_account_bucket} 
 EOL
 
