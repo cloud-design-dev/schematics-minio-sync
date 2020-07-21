@@ -14,6 +14,7 @@ chmod +x mc
 mv mc /usr/local/bin
 chown minio-user:minio-user /usr/local/bin/mc 
 
+
 mkdir /root/.mc 
 cat >/root/.mc/config.json<<EOL
 {
@@ -36,8 +37,6 @@ cat >/root/.mc/config.json<<EOL
 	}
 }
 EOL
-
-
 
 cat >/root/copy-buckets.sh <<EOL
 #!/usr/bin/env bash

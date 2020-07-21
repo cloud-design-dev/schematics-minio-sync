@@ -1,3 +1,9 @@
+variable "vpc_name" {
+  description = "The VPC where minio sync instance will be created."
+  default     = ""
+  type        = string
+}
+
 variable "os_image" {
   description = "Default OS image for minio client. Currently tested with Ubuntu 16 and 18."
   type        = string
@@ -11,7 +17,7 @@ variable "linux_ssh_key" {
 }
 
 variable "region" {
-  description = "Default OS image for minio client. Currently tested with Ubuntu 16 and 18."
+  description = "VPC Region where resources will be deployed."
   type        = string
   default     = ""
 }
@@ -79,16 +85,9 @@ variable "destination_account_secret_key" {
   default     = ""
 }
 
-variable "ibmcloud_api_key" {
-  type    = string
-  default = ""
-}
-
-variable "vpc_name" {
-  default = ""
-  type    = string
-}
 
 variable "default_instance_profile" {
-  default = "cx2-2x4"
+  description = "Default instance profile size."
+  type        = string
+  default     = "cx2-2x4"
 }
