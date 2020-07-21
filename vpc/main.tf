@@ -58,7 +58,7 @@ resource "ibm_is_security_group_rule" "inbound_ssh" {
 }
 
 resource "ibm_is_floating_ip" "floatingip" {
-  name   = "minio-fip"
+  name   = "minio-sync-fip"
   target = ibm_is_instance.minio_instance.primary_network_interface.0.id
 }
 
