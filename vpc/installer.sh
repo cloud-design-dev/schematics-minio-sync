@@ -14,13 +14,8 @@ chmod +x mc
 mv mc /usr/local/bin
 chown minio-user:minio-user /usr/local/bin/mc 
 
-# /usr/local/bin/mc config host add destination-account https://s3.direct.${destination_account_endpoint}.cloud-object-storage.appdomain.cloud ${destination_account_access_key} ${destination_account_secret_key}
-# /usr/local/bin/mc config host add source-account https://s3.direct.${source_account_endpoint}.cloud-object-storage.appdomain.cloud ${source_account_access_key} ${source_account_secret_key}
-
-
-crontime=`date -d '+1 hour' '+%H'`
-
-cat >mc.json <<EOL
+mkdir /root/.mc 
+cat >/root/.mc/config.json<<EOL
 {
 	"version": "9",
 	"hosts": {
@@ -46,13 +41,12 @@ EOL
 
 cat >/root/copy-buckets.sh <<EOL
 #!/usr/bin/env bash
-dt=`date "+%Y%m%d%H%M"`
-logfile=/tmp/"`date "+%Y%m%d%H%M"`-log"
+
 /usr/local/bin/mc cp source-account/${source_account_bucket} destination-account/${destination_account_bucket} 
 EOL
 
 chmod +x /root/copy-buckets.sh
 
-
-
-
+croncmd="/root/copy-buckets.sh  > /tmp/`date "+%Y%m%d%H%M"`-log 2>&1"
+cronjob="30 `date -d '+1 hour' '+%H'` * * * $croncmd"
+echo "$cronjob" | crontab -
