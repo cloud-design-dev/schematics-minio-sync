@@ -3,11 +3,11 @@ This repo will deploy a VPC instance that is configured to copy the contents of 
 
 ## Prerequisites
  - IBM Cloud VPC
- - HMAC credentials for the source account. These credentials should be scoped to a service ID with `Reader` on the ICOS bucket. 
- - HMAC credentials for destination account. These credentials should be scoped to a service ID with `Writer` on the ICOS bucket. 
+ - Source and Destination accounts prepared. See this [guide](PREREQS.md)
 
 ## Use with Schematics
-Here are the steps to using this example with Schematics
+After you've prepped both accounts per this [guide](PREREQS.md), you can deploy the environment with Schematics. Here are the steps to using this example with Schematics: 
+
  - Create a new Worskpace by going to the [Workspace](https://cloud.ibm.com/schematics/workspaces) page and clicking *Create workspace*
  - On the subsequent page give your workspace a name and select the Resource Group where the workspace will be deployed. Then click *Create*. 
  ![Create workspace](images/create-workspace.png)  
@@ -39,8 +39,8 @@ Filter by key `source_account_` and fill in the following:
 
 ![Filter Source Account variables](images/filter-source.png)
 
-**source_account_bucket** - Cloud Object Storage bucket name on the source account.    
-**source_account_endpoint** - Cloud Object Storage endpoint on the source account.   
+**source_account_bucket** - Cloud Object Storage bucket name on the source account.  
+**source_account_endpoint** - Cloud Object Storage endpoint on the source account.  
 **source_account_access_key** - Cloud Object Storage Access Key on the source account.  
 **source_account_secret_key** - Cloud Object Storage Secret Key on the source account.  
 
@@ -49,7 +49,7 @@ Filter by key `destination_account_` and fill in the following:
 
 ![Filter Destination Account variables](images/filter-destination.png)
 
-**destination_account_bucket** - Cloud Object Storage bucket name on the destination account.   
+**destination_account_bucket** - Cloud Object Storage bucket name on the destination account.  
 **destination_account_endpoint** - Cloud Object Storage endpoint on the destination account.  
 **destination_account_access_key** - Cloud Object Storage Access Key on the destination account.  
 **destination_account_secret_key** - Cloud Object Storage Secret Key on the destination account.  
